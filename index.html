@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rasputin - Il Misticismo Russo</title>
+    <style>
+        body {
+            font-family: 'italic';
+            font-size: 18px;
+            margin: 0;
+            padding: 0;
+            background-color: #f0e6d2; 
+            color: #500b0b; 
+        }
+        header {
+            background-color: #500b0b; 
+            color: #f0e6d2; 
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            background-color: #500b0b; 
+            padding: 10px;
+            text-align: center;
+        }
+        nav select {
+            color: #f0e6d2;
+            background-color: #500b0b; 
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        section {
+            padding: 20px;
+            border-top-left-radius: 10px; 
+            border-top-right-radius: 10px; 
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            margin-bottom: 20px; 
+        }
+        section h2 {
+            border: 2px solid #5c1a1b; 
+            background-color: #6b5e55; 
+            color: #f0e6d2; 
+            padding: 10px;
+            text-align: center;
+            border-top-left-radius: 10px; 
+            border-top-right-radius: 10px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+        section p {
+            border: 2px solid #5c1a1b;
+            background-color: #f0e6d2;
+            padding: 10px;
+            margin: 0; 
+            text-align: justify; 
+            border-top-left-radius: 10px; 
+            border-top-right-radius: 10px; 
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+        section img {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+            padding-top: 10px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px; 
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            cursor: pointer;
+        }
+        footer {
+            background-color: #4e443c;
+            color: #f0e6d2;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-top-left-radius: 10px; 
+            border-top-right-radius: 10px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+        .nav-banner {
+            background-color: #500b0b;
+            padding: 10px;
+            text-align: center;
+            color: #f0e6d2;
+        }
+        .nav-banner a {
+            color: #f0e6d2;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .nav-banner button {
+            background-color: #6b5e55;
+            color: #f0e6d2;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .nav-banner button:hover {
+            background-color: #5c1a1b;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Rasputin - Il Misticismo Russo</h1>
+    </header>
+<nav>
+        <select onchange="window.location.href=this.value">
+            <option value="#about">Cosa vuoi sapere?</option>
+            <option value="#about">Chi era Rasputin</option>
+            <option value="#why">Perché Rasputin</option>
+            <option value="#lascito">Il suo lascito</option>
+            <option value="#contact">Contattaci</option>
+        </select>
+    </nav>
+    <div class="nav-banner">
+        <a href="approfondimento.html">Approfondimento</a>
+        <a href="fonti.html">Fonti</a>
+    </div>
+    <section id="about">
+        <h2>Chi era Rasputin</h2>
+        <img id="rasputinImage" src="https://th.bing.com/th/id/OIP.53H6ncEEYQ7qOzFBI2btLwHaIh?w=198&h=229&c=7&r=0&o=5&pid=1.7" height="400" width="300" alt="Immagine di Rasputin" onclick="changeImage()">
+        <button onclick="toggleFullScreen(document.getElementById('rasputinImage'))">Schermo Intero</button>
+        <br>
+        <br>
+        <p>Rasputin è stato un mistico russo del XX secolo, noto per il suo influsso sulla famiglia imperiale russa degli Zar. La sua figura è avvolta da leggende e misteri, con molte storie che circondano la sua vita e la sua morte. Esso è stato un mistico russo del XX secolo, nato nel 1869 in Siberia. La sua figura è avvolta da leggende e misteri, essendo divenuto famoso per il suo presunto potere di guarigione e il suo influsso sulla famiglia imperiale russa degli Zar. </p>
+    </section>
+    <div class="audio-banner">
+        <button id="playPauseButton" onclick="togglePlayPause()">Inno Russo</button>
+        <button onclick="stopAudio()">Stop</button>
+        <div class="audio-slider" onclick="setAudioPosition(event)">
+            <div class="audio-progress"></div>
+        </div>
+    </div>
+
+    <!-- Audio element -->
+    <audio id="audioPlayer" src="russia.mp3"></audio>
+
+    <script>
+        var audioPlayer = document.getElementById("audioPlayer");
+        var playPauseButton = document.getElementById("playPauseButton");
+        var audioProgress = document.querySelector(".audio-progress");
+
+        function togglePlayPause() {
+            if (audioPlayer.paused) {
+                audioPlayer.play();
+                playPauseButton.textContent = "Pause";
+            } else {
+                audioPlayer.pause();
+                playPauseButton.textContent = "Play";
+            }
+        }
+
+        function stopAudio() {
+            audioPlayer.pause();
+            audioPlayer.currentTime = 0;
+            playPauseButton.textContent = "Play";
+        }
+
+        function setAudioPosition(event) {
+            var sliderWidth = event.target.offsetWidth;
+            var clickX = event.clientX - event.target.offsetLeft;
+            var audioDuration = audioPlayer.duration;
+            var newPosition = (clickX / sliderWidth) * audioDuration;
+
+            audioPlayer.currentTime = newPosition;
+        }
+
+        audioPlayer.addEventListener("timeupdate", function() {
+            var progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+            audioProgress.style.width = progress + "%";
+        });
+    </script>
+    <section id="why">
+        <h2>Perché Rasputin</h2>
+        <br>
+        <br>
+        <p>Ho scelto Rasputin come oggetto di questo sito per i collegamenti che si possono fare con la materia di storia con la rivoluzione russa, uno degli eventi più significativi del passato secolo. Rasputin giocò un ruolo importante in questo contribuendo a quello che è uno degli eventi di maggior spessore nella storia contemporanea</p>
+    </section>
+    <section id="lascito">
+        <h2>Il suo lascito</h2>
+        <p>L'impatto di Rasputin sulla storia russa è stato significativo, influenzando direttamente la politica e la società dell'epoca. La sua presenza a corte ha minato ulteriormente la fiducia nel governo zarista, alimentando la percezione di corruzione e incompetenza. La sua influenza sull'imperatrice e la famiglia reale ha contribuito al deterioramento dell'autorità zarista, accelerando il declino dell'impero russo. La sua figura controversa è diventata simbolo di intrighi di corte e disfunzione politica, alimentando ulteriormente le tensioni sociali e politiche nell'epoca pre-rivoluzionaria. La sua morte violenta ha scatenato turbolenze politiche e ha contribuito indirettamente al crollo del regime zarista durante la Rivoluzione Russa del 1917.</p>
+    </section>
+    <section id="contact">
+        <h2>Contattaci</h2>
+        <p>Per ulteriori informazioni su Rasputin o per domande, non esitare a contattarci. Saremo lieti di fornirti tutte le informazioni necessarie.</p>
+        <p>Email: edoardo.santini@didattica.liceogrigoletti.edu.it</p>
+        <p>Telefono: +39 xxx xxx xxxx</p>
+    </section>
+    <br>
+    <br>
+    <br>
+    <footer>
+        <p>&copy; 2024 Rasputin - Il Misticismo Russo</p>
+    </footer>
+
+    <script>  //schermo intero
+        function toggleFullScreen(element) {
+            if (!document.fullscreenElement) {
+                if (element.requestFullscreen) {
+                    element.requestFullscreen();
+                } else if (element.webkitRequestFullscreen) { 
+                    element.webkitRequestFullscreen();
+                } else if (element.msRequestFullscreen) { 
+                    element.msRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) { 
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) { 
+                    document.msExitFullscreen();
+                }
+            }
+        }
+
+        function changeImage() {
+            var image = document.getElementById('rasputinImage');
+            if (image.src === 'https://th.bing.com/th/id/OIP.53H6ncEEYQ7qOzFBI2btLwHaIh?w=198&h=229&c=7&r=0&o=5&pid=1.7') {
+                image.src = 'https://th.bing.com/th/id/R.9778b72e2b1ff0bf1c8df74db0d82765?rik=qULbAdpdCFxIjg&pid=ImgRaw&r=0';
+            } else {
+                image.src = 'https://th.bing.com/th/id/OIP.53H6ncEEYQ7qOzFBI2btLwHaIh?w=198&h=229&c=7&r=0&o=5&pid=1.7';
+            }
+        }
+    </script>
+</body>
+</html>
